@@ -1,0 +1,9 @@
+{
+  "name": "Desktop",
+  "main": "src/server.js",
+  "compatibilityDate": "2023-12-05",
+  "serve": {
+    "path": "public",
+    "build": "src/client.js"
+  }
+}
