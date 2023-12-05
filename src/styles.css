@@ -54,6 +54,9 @@ body {
   
   #bot1 {
     background-color: rgb(239, 78, 172);
+    :active {
+        background-color: red;
+    }
   }
   #bot2 {
     background-color: rgb(239, 78, 172);

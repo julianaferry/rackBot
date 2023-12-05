@@ -18,12 +18,7 @@ function add(text) {
   output.appendChild(document.createTextNode(text));
   output.appendChild(document.createElement("br"));
 }
-// function remove(text) {
-//   if(text) {
-//     output.removeChild(text);
-//   }
 
-// }
 
 /**
  * A PartySocket is like a WebSocket, but with more features.
@@ -39,9 +34,9 @@ const conn = new PartySocket({
  * Event listener to handle received messages.
  * @param {Event} event - The message event
  */
-// conn.addEventListener("message", function (event) {
-//   add(`Received -> ${event.data}`);
-// });
+conn.addEventListener("message", function (event) {
+  add(`Received -> ${event.data}`);
+});
 
 /**
  * Event listener for when the connection opens.
@@ -51,6 +46,9 @@ const getBot1 = document.getElementById('bot1')
 getBot1.addEventListener('click', () => {
 
   pingInterval = setTimeout(function () {
+    conn.addEventListener("message", function (event) {
+        add(`Forward -> ${event.data}`);
+      });
 
     add('Forward');
    
@@ -79,6 +77,16 @@ getBot3.addEventListener('click', () => {
 
 });
 
+const getBot4 = document.getElementById('bot4')
+getBot4.addEventListener('click', () => {
+
+  pingInterval = setTimeout(function () {
+
+    add('Left');
+   
+  }, 500);
+
+});
 
 getBot2.removeEventListener()
 getBot3.removeEventListener()
