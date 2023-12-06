@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="/normalize.css" />
     <link rel="stylesheet" href="/dist/client.css" />
+  
   </head>
   <body>
     <div id="app">
@@ -26,18 +27,55 @@
     </div>
     <div class="botDiv">
       <div class="botMove">
-        <button class="botStyle" id="bot1">Forward</button>
-        <button class="botStyle" id="bot2">Backward</button>
-        <button class="botStyle" id="bot3">Right</button>
-        <button class="botStyle" id="bot4">Left</button>
+        <button class="botStyle" id="bot1" onclick=onClick()>Forward</button>
+        <button class="botStyle" id="bot2" onclick=onClick()>Backward</button>
+        <button class="botStyle" id="bot3" onclick=onClick()>Right</button>
+        <button class="botStyle" id="bot4" onclick=onClick()>Left</button>
       </div>
 
-      <button class="botStyle" id="bot5">Light 1</button>
-      <button class="botStyle" id="bot6">Light 2</button>
-      <button class="botStyle" id="bot7">Get Temperature</button>
-      <button class="botStyle" id="bot8">Music?</button>
+      <button class="botStyle" id="bot5" onclick=onClick()>Light 1</button>
+      <button class="botStyle" id="bot6" onclick=onClick()>Light 2</button>
+      <button class="botStyle" id="bot7" onclick=onClick()>Get Temperature</button>
+      <button class="botStyle" id="bot8" onclick=onClick()>Music?</button>
     </div>
     <script type="module" src="/dist/client.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
   </body>
   <footer>All rights reserved AT-D2 team</footer>
 </html>
+
+<script>
+
+
+const onClick = () => {
+  const h2 = document.createElement('h2')
+  h2.innerText = 'Move bot'
+  document.body.append(h2)
+
+const submitButton= document.querySelectorAll('botStyle');
+
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  fetch("http://localhost:8000/", {
+    method: "GET",
+    }).then(res => res.text())
+    .then(text => {
+      console.log("Request complete! response:", text);
+    });
+ });
+}
+
+// const socket = io("<forwarder-url>");
+
+// socket.timeout(2000).emit('command', val, (err, response) => {
+//   if (err) {
+//     console.log('the server did not acknowledge the event in the given delay');
+//   } else {
+//     console.log(response);
+//   }
+// });
+// console.log(socket);
+</script>

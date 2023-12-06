@@ -7,7 +7,9 @@
     "deploy": "partykit deploy"
   },
   "dependencies": {
-    "partysocket": "0.0.16"
+    "partysocket": "0.0.16",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "partykit": "0.0.39",

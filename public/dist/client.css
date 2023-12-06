@@ -66,6 +66,11 @@ h6 {
 #bot8 {
   background-color: rgb(83, 239, 78);
 }
+h2 {
+  color: red;
+  display: flex;
+  justify-content: center;
+}
 footer {
   margin: 200px 0 0 30px;
 }
