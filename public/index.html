@@ -40,42 +40,56 @@
     </div>
     <script type="module" src="/dist/client.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+  
+
 
   </body>
   <footer>All rights reserved AT-D2 team</footer>
 </html>
 
-<script>
+<script type="text/javascript">
+    
 
 
 const onClick = () => {
-  const h2 = document.createElement('h2')
-  h2.innerText = 'Move bot'
-  document.body.append(h2)
-
-const submitButton= document.querySelectorAll('botStyle');
-
-
-submitButton.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  fetch("http://localhost:8000/", {
-    method: "GET",
-    }).then(res => res.text())
-    .then(text => {
-      console.log("Request complete! response:", text);
-    });
+    const h2 = document.createElement('h2')
+    h2.innerText = 'Move bot'
+    document.body.append(h2)
+    const msg =  document.querySelectorAll('.botStyle');
+ 
+ msg.forEach(item => {
+ console.log(item.innerHTML)
+ 
  });
+  // const submitButton= document.querySelectorAll('botStyle');
+
+  //   event.preventDefault();
+
+    // fetch("http://localhost:8000/", {
+    //   method: "GET",
+    //   }).then(res => res.text())
+    //   .then(text => {
+    //     console.log("Request complete! response:", text);
+    //   });
+
+
+    window.onload= function(){
+    const socket = io('<forward-url>');
+    }
+ 
+ 
+    socket.emit(msg.innerHTML, msg.value);
+    msg.value = '';
+    return (false);
+
+    socket.timeout(2000).emit('command', val, (err, response) => {
+      if (err) {
+        console.log('the server did not acknowledge the event in the given delay');
+      } else {
+        console.log(response);
+      }
+    });
+    console.log(socket);
+
 }
-
-// const socket = io("<forwarder-url>");
-
-// socket.timeout(2000).emit('command', val, (err, response) => {
-//   if (err) {
-//     console.log('the server did not acknowledge the event in the given delay');
-//   } else {
-//     console.log(response);
-//   }
-// });
-// console.log(socket);
 </script>
