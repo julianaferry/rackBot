@@ -27,7 +27,7 @@
     </div>
     <div class="botDiv">
       <div class="botMove">
-        <button class="botStyle" id="bot1" onclick=onClick()>Forward</button>
+        <button class="botStyle" id="bot1" onclick=onClick(this)>Forward</button>
         <button class="botStyle" id="bot2" onclick=onClick()>Backward</button>
         <button class="botStyle" id="bot3" onclick=onClick()>Right</button>
         <button class="botStyle" id="bot4" onclick=onClick()>Left</button>
@@ -36,35 +36,44 @@
       <button class="botStyle" id="bot5" onclick=onClick()>Light 1</button>
       <button class="botStyle" id="bot6" onclick=onClick()>Light 2</button>
       <button class="botStyle" id="bot7" onclick=onClick()>Get Temperature</button>
-      <button class="botStyle" id="bot8" onclick=onClick()>Music?</button>
+      <button class="botStyle" id="bot8" onclick=onClick()>Music</button>
     </div>
     <script type="module" src="/dist/client.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-  
-
-
   </body>
   <footer>All rights reserved AT-D2 team</footer>
 </html>
 
+
+
 <script type="text/javascript">
     
-
-
 const onClick = () => {
     const h2 = document.createElement('h2')
-    h2.innerText = 'Move bot'
-    document.body.append(h2)
-    const msg =  document.querySelectorAll('.botStyle');
  
- msg.forEach(item => {
- console.log(item.innerHTML)
- 
- });
-  // const submitButton= document.querySelectorAll('botStyle');
 
-  //   event.preventDefault();
+    const button =  document.getElementsByClassName('botStyle');
 
+    const onClick = (event) => {
+    if (event.target.nodeName === 'BUTTON') {
+      event.preventDefault();
+      
+      h2.innerText = `Bot ${event.target.innerHTML}`;
+      document.body.append(h2);
+
+      setTimeout(() => {
+        h2.innerHTML = '';
+
+        window.removeEventListener('click', onClick); 
+        
+      }, 1000)
+
+      // alert("button " + event.target.innerHTML + " was clicked");
+    }
+  }
+
+  window.addEventListener('click', onClick);
+  
     // fetch("http://localhost:8000/", {
     //   method: "GET",
     //   }).then(res => res.text())
@@ -78,8 +87,8 @@ const onClick = () => {
     }
  
  
-    socket.emit(msg.innerHTML, msg.value);
-    msg.value = '';
+    socket.emit(button.innerHTML, msg.value);
+    button.value = '';
     return (false);
 
     socket.timeout(2000).emit('command', val, (err, response) => {
@@ -90,6 +99,6 @@ const onClick = () => {
       }
     });
     console.log(socket);
-
 }
+
 </script>
